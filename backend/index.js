@@ -13,15 +13,17 @@ app.use(express.json());
 // routes
 app.use("/books", bookRoutes);
 
+require("dotenv").config();
+
 const start = async () => {
   try {
-    const connectionDb = await mongoose.connect(
-      "mongodb+srv://sonalitiwari2904_db_user:P5mEl86tyWxgAhsE@cluster0.qxw6k7r.mongodb.net/minilibrary"
-    );
+    const connectionDb = await mongoose.connect(process.env.MONGO_URI);
 
     console.log(`Mongo Connected: ${connectionDb.connection.host}`);
-    app.listen(5000, () => {
-      console.log("Server running on port 5000");
+    const PORT = process.env.PORT || 5000;
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
     });
 
   } catch (error) {
