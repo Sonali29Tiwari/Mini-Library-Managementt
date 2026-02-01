@@ -20,6 +20,7 @@ const start = async () => {
     const connectionDb = await mongoose.connect(process.env.MONGO_URI);
 
     console.log(`Mongo Connected: ${connectionDb.connection.host}`);
+   
     const PORT = process.env.PORT || 5000;
 
     app.listen(PORT, () => {
